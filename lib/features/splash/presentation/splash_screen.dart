@@ -2,19 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../features/auth/providers/auth_provider.dart';
 
-// ─────────────────────────────────────────────────────────
-// WHAT CHANGED AND WHY:
-//
-// Old version had ref.listen() trying to navigate manually.
-// That conflicted with GoRouter's own redirect logic.
-// Two things were trying to navigate at the same time → stuck.
-//
-// Fix: SplashScreen does ZERO navigation.
-// It only shows the animation + loading state.
-// GoRouter's redirect (via _RouterNotifier) handles ALL navigation.
-// When authProvider finishes loading → notifier fires →
-// GoRouter redirects automatically to /login or /dashboard.
-// ─────────────────────────────────────────────────────────
+
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});

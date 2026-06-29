@@ -3,10 +3,7 @@ import 'dart:convert';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 
-/// Manages the device camera lifecycle.
-/// - Always picks the FRONT camera (driver-facing)
-/// - Captures frames at 10 FPS as Base64-encoded JPEG
-/// - Exposes a stream of Base64 strings → feed directly into WebSocket
+
 class CameraService {
   CameraController? _controller;
   Timer? _frameTimer;
@@ -14,20 +11,18 @@ class CameraService {
 
   bool _isCapturing = false;
 
-  // ── Public getters ─────────────────────────────────────────
+  //  Public getters 
 
   CameraController? get controller => _controller;
   bool get isInitialized => _controller?.value.isInitialized ?? false;
   bool get isCapturing => _isCapturing;
 
-  /// Stream of Base64-encoded JPEG frames at ~10 FPS.
-  /// Subscribe in WebSocketService and send each frame to friend's server.
+  /// Stream of Base64-encoded JPEG frames at 10 FPS.
   Stream<String> get frameStream => _frameStreamController.stream;
 
-  // ── Lifecycle ──────────────────────────────────────────────
+  //  Lifecycle 
 
-  /// Call this on session start.
-  /// Returns null on success, error message string on failure.
+  
   Future<String?> initialize() async {
     try {
       final cameras = await availableCameras();
@@ -41,8 +36,8 @@ class CameraService {
 
       _controller = CameraController(
         front,
-        ResolutionPreset.medium, // 480p — good balance for AI + bandwidth
-        enableAudio: false,       // driver monitoring doesn't need audio
+        ResolutionPreset.medium, 
+        enableAudio: false,       
         imageFormatGroup: ImageFormatGroup.jpeg,
       );
 
@@ -55,7 +50,7 @@ class CameraService {
     }
   }
 
-  /// Start capturing frames at 10 FPS.
+  // Start capturing frames at 10 FPS.
   void startCapture() {
     if (!isInitialized || _isCapturing) return;
     _isCapturing = true;
@@ -66,26 +61,26 @@ class CameraService {
     });
   }
 
-  /// Stop frame capture but keep controller alive (preview still shows).
+  // Stop frame capture but keep controller alive (preview still shows).
   void stopCapture() {
     _frameTimer?.cancel();
     _frameTimer = null;
     _isCapturing = false;
   }
 
-  /// Full teardown — call on session end.
+  // Full teardown — call on session end.
   Future<void> dispose() async {
     stopCapture();
     await _controller?.dispose();
     _controller = null;
   }
 
-  /// Close the frame stream — call only when the app is fully done with camera.
+  // Close the frame stream — call only when the app is fully done with camera.
   void closeStream() {
     _frameStreamController.close();
   }
 
-  // ── Private ────────────────────────────────────────────────
+  //  Private 
 
   Future<void> _captureFrame() async {
     if (_controller == null || !isInitialized || _isCapturing == false) return;

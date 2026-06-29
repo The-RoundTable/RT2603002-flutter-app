@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../providers/session_provider.dart';
 
-/// Scrollable list of recent AI detection events.
-/// New events slide in from the top.
+
 class RecentEventsTicker extends StatefulWidget {
   final List<DmsEvent> events;
 

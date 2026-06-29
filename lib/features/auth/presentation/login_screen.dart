@@ -44,20 +44,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     super.dispose();
   }
 
-  // ─────────────────────────────────────────────────────
-  // HOW AUTH WORKS NOW WITH SUPABASE:
-  //
-  // 1. User taps Sign In
-  // 2. _handleLogin() calls authActionsProvider.login()
-  // 3. AuthRepository calls supabase.auth.signInWithPassword()
-  // 4. Supabase verifies credentials on their server
-  // 5. On success → Supabase fires signedIn event on stream
-  // 6. authProvider (StreamProvider) picks up the event
-  // 7. _RouterNotifier detects change → GoRouter redirects
-  // 8. User lands on Dashboard
-  //
-  // On error → authActionsProvider goes to error state
-  // ref.listen detects error → shows snackbar
+  
   // ─────────────────────────────────────────────────────
   void _setupListeners() {
     ref.listen<AsyncValue<void>>(authActionsProvider, (previous, next) {

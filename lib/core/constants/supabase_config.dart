@@ -1,16 +1,3 @@
-// ─────────────────────────────────────────────────────────
-// HOW TO GET THESE VALUES:
-//
-// 1. Go to https://supabase.com
-// 2. Create a new project (or open existing one)
-// 3. Go to Project Settings → API
-// 4. Copy "Project URL" → paste as supabaseUrl
-// 5. Copy "anon public" key → paste as supabaseAnonKey
-//
-// The anon key is SAFE to put in Flutter code.
-// It only has the permissions your friend sets in Supabase RLS.
-// Never put the "service_role" key in Flutter — that's private.
-// ─────────────────────────────────────────────────────────
 
 class SupabaseConfig {
   // Replace these with your actual values from Supabase dashboard

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/camera_provider.dart';
 
-/// Real camera preview widget.
-/// Handles all camera states: initializing, permission denied, error, live feed.
-/// Drop this directly into session_button.dart replacing _CameraPlaceholder.
+
 class CameraPreviewWidget extends ConsumerWidget {
   final AnimationController liveAnim;
 
@@ -44,7 +42,7 @@ class CameraPreviewWidget extends ConsumerWidget {
     );
   }
 
-  // ── Live feed ──────────────────────────────────────────────
+  //  Live feed 
 
   Widget _buildLiveFeed(CameraController controller, CameraStatus status) {
     return Container(
@@ -53,7 +51,7 @@ class CameraPreviewWidget extends ConsumerWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // ── Real camera preview ──────────────────────────
+          //  Real camera preview
           ClipRect(
             child: OverflowBox(
               alignment: Alignment.center,
@@ -68,10 +66,10 @@ class CameraPreviewWidget extends ConsumerWidget {
             ),
           ),
 
-          // ── Scan line overlay ────────────────────────────
+          //  Scan line overlay 
           const _ScanLineOverlay(),
 
-          // ── LIVE badge ────────────────────────────────────
+          //  LIVE badge 
           Positioned(
             top: 10,
             left: 10,
@@ -81,14 +79,14 @@ class CameraPreviewWidget extends ConsumerWidget {
             ),
           ),
 
-          // ── Corner brackets ───────────────────────────────
+          //  Corner brackets 
           ..._buildCornerBrackets(),
         ],
       ),
     );
   }
 
-  // ── State screens ──────────────────────────────────────────
+  //  State screens
 
   Widget _buildLoading() {
     return _StateContainer(
@@ -199,7 +197,7 @@ class CameraPreviewWidget extends ConsumerWidget {
     );
   }
 
-  // ── Corner brackets ────────────────────────────────────────
+  //  Corner brackets
 
   List<Widget> _buildCornerBrackets() {
     const color = Color(0xFF00E676);
@@ -237,7 +235,7 @@ class CameraPreviewWidget extends ConsumerWidget {
   }
 }
 
-// ─── Supporting Widgets ────────────────────────────────────────────────────────
+// Supporting Widgets 
 
 class _StateContainer extends StatelessWidget {
   final Widget child;

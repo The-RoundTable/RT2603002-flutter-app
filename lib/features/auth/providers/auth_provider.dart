@@ -3,21 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' as supa;
 import '../data/auth_repository.dart';
 import '../../../core/models/user_model.dart';
 
-// ─────────────────────────────────────────────────────────
-// RIVERPOD LESSON — StreamProvider for auth
-//
-// Previously we used AsyncNotifier with manual token checking.
-// Now we use Supabase's built-in auth state stream.
-//
-// Supabase fires events on this stream:
-//   signedIn    → user just logged in
-//   signedOut   → user just logged out
-//   tokenRefreshed → Supabase auto-refreshed the JWT
-//   initialSession → app started, session restored from storage
-//
-// We map these events to our own AppAuthState.
-// GoRouter listens via _RouterNotifier and redirects.
-// ─────────────────────────────────────────────────────────
+
 
 // Repository provider — single instance
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
@@ -36,20 +22,7 @@ class AppAuthState {
   bool get isAuthenticated => status == AuthStatus.authenticated;
 }
 
-// ─────────────────────────────────────────────────────────
-// authProvider — now a StreamProvider
-//
-// Supabase gives us a stream of auth state changes.
-// We convert each Supabase AuthState event into our AppAuthState.
-//
-// StreamProvider automatically handles:
-//   - loading state (before first event arrives)
-//   - data state (when event arrives)
-//   - error state (if stream throws)
-//
-// This is cleaner than AsyncNotifier for auth because
-// Supabase already manages the state — we just listen.
-// ─────────────────────────────────────────────────────────
+
 final authProvider = StreamProvider<AppAuthState>((ref) async* {
   final repo = ref.watch(authRepositoryProvider);
 
@@ -74,15 +47,7 @@ final authProvider = StreamProvider<AppAuthState>((ref) async* {
   }
 });
 
-// ─────────────────────────────────────────────────────────
-// Separate notifier for login/register/logout ACTIONS
-//
-// StreamProvider above handles reading auth state.
-// This AsyncNotifier handles WRITING (login, register, logout).
-//
-// Why separate? Because StreamProvider is read-only.
-// We need a Notifier to hold methods.
-// ─────────────────────────────────────────────────────────
+
 class AuthActionsNotifier extends AsyncNotifier<void> {
   AuthRepository get _repo => ref.read(authRepositoryProvider);
 

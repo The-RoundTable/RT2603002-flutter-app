@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ─── Enums ────────────────────────────────────────────────────────────────────
+//  Enums 
 
 enum Severity { low, medium, high, critical }
 
@@ -54,7 +54,7 @@ extension EventTypeExt on EventType {
   }
 }
 
-// ─── Models ───────────────────────────────────────────────────────────────────
+//  Models 
 
 class DmsEvent {
   final String id;
@@ -148,7 +148,7 @@ class EventCardState {
   }
 }
 
-// ─── Session State ─────────────────────────────────────────────────────────────
+// Session State 
 
 class SessionState {
   final bool isActive;
@@ -190,7 +190,7 @@ class SessionState {
   }
 }
 
-// ─── Session Notifier ──────────────────────────────────────────────────────────
+// ─── Session Notifier 
 
 class SessionNotifier extends AsyncNotifier<SessionState> {
   Timer? _mockTimer;
@@ -209,7 +209,7 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
     return const SessionState();
   }
 
-  // ── Public API ─────────────────────────────────────────────
+  // ── Public API 
 
   Future<void> startSession() async {
     final prev = state.value ?? const SessionState();
@@ -254,7 +254,7 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
     _applyEvent(event);
   }
 
-  // ── Private ────────────────────────────────────────────────
+  // ── Private 
 
   void _startMockStream() {
     // Fires a mock event every 2–5 seconds to simulate AI detections
@@ -337,7 +337,7 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
   }
 }
 
-// ─── Providers ─────────────────────────────────────────────────────────────────
+// Providers 
 
 final sessionProvider = AsyncNotifierProvider<SessionNotifier, SessionState>(
   SessionNotifier.new,

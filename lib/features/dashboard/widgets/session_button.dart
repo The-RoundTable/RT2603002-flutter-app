@@ -56,7 +56,7 @@ class _SessionButtonState extends ConsumerState<SessionButton>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ── Camera preview area ────────────────────────────────
+        // ── Camera preview area 
         AnimatedContainer(
           duration: const Duration(milliseconds: 400),
           curve: Curves.easeInOut,
@@ -70,7 +70,7 @@ class _SessionButtonState extends ConsumerState<SessionButton>
         ),
         if (widget.isActive) const SizedBox(height: 12),
 
-        // ── Start / End button ─────────────────────────────────
+        // ── Start / End button 
         GestureDetector(
           onTap: _handleTap,
           child: AnimatedContainer(

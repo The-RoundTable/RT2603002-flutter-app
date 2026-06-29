@@ -2,8 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../providers/session_provider.dart';
 
-/// Animated arc gauge that shows overall driver risk level.
-/// Color and needle animate smoothly on severity change.
+
 class RiskGauge extends StatefulWidget {
   final double riskScore; // 0.0 – 1.0
   final Severity severity;

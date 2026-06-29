@@ -1,12 +1,3 @@
-// ─────────────────────────────────────────────────────────
-// This matches your friend's "profiles" table exactly:
-//   id          uuid  (same as auth.users.id)
-//   name        text
-//   created_at  timestamp
-//
-// Note: email comes from Supabase auth, not profiles table.
-// Supabase auth handles email separately in auth.users.
-// ─────────────────────────────────────────────────────────
 
 class UserModel {
   final String id;

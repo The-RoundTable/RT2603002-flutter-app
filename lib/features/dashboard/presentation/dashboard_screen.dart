@@ -51,15 +51,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Step 2: App bar ──────────────────────────────────
+          //  Step 2: App bar 
           _buildAppBar(ref, isSmall),
           const SizedBox(height: 20),
 
-          // ── Step 3: Risk gauge ───────────────────────────────
+          //  Step 3: Risk gauge 
           _buildGaugeSection(session),
           const SizedBox(height: 24),
 
-          // ── Step 4: Start/End session button ─────────────────
+          //  Step 4: Start/End session button
           SessionButton(
             isActive: session.isActive,
             onStart: () => ref.read(sessionProvider.notifier).startSession(),
@@ -67,7 +67,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ),
           const SizedBox(height: 28),
 
-          // ── Step 5: Status cards ─────────────────────────────
+          //  Step 5: Status cards 
           _buildSectionHeader('Detection Status'),
           const SizedBox(height: 12),
           StatusCardsGrid(
@@ -76,7 +76,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ),
           const SizedBox(height: 28),
 
-          // ── Step 6: Recent events ticker ─────────────────────
+          //  Step 6: Recent events ticker 
           _buildSectionHeader(
             'Recent Events',
             trailing: session.recentEvents.isNotEmpty
@@ -97,7 +97,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  // ─── Step 3 helper: gauge + session duration ──────────────────────────────
+  //  Step 3 helper: gauge + session duration 
 
   Widget _buildGaugeSection(SessionState session) {
     return Container(
@@ -141,7 +141,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  // ─── App bar ────────────────────────────────────────────────────────────────
+  //  App bar 
 
   Widget _buildAppBar(WidgetRef ref, bool isSmall) {
     final name = ref.watch(driverNameProvider);
@@ -186,7 +186,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  // ─── Section header ─────────────────────────────────────────────────────────
+  //  Section header 
 
   Widget _buildSectionHeader(String title, {Widget? trailing}) {
     return Row(
@@ -205,7 +205,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  // ─── Step 6: Bottom navigation ───────────────────────────────────────────────
+  // Step 6: Bottom navigation 
 
   Widget _buildBottomNav() {
     return Container(
@@ -225,8 +225,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (index) {
           setState(() => _currentNavIndex = index);
-          // TODO: wire GoRouter navigation here when analytics/alerts/settings
-          // screens are built
+          
         },
         destinations: const [
           NavigationDestination(
@@ -267,7 +266,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   }
 }
 
-// ─── Session timer widget ────────────────────────────────────────────────────
+//  Session timer widget 
 
 class _SessionTimer extends StatefulWidget {
   final DateTime startTime;

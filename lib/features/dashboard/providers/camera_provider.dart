@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/services/camera_service.dart';
 
-// ─── Camera State ──────────────────────────────────────────────────────────────
+//  Camera State 
 
 enum CameraStatus {
   idle,           // session not started
@@ -40,7 +40,7 @@ class CameraState {
   }
 }
 
-// ─── Camera Notifier ───────────────────────────────────────────────────────────
+//  Camera Notifier 
 
 class CameraNotifier extends AsyncNotifier<CameraState> {
   late final CameraService _service;
@@ -58,7 +58,7 @@ class CameraNotifier extends AsyncNotifier<CameraState> {
     return const CameraState();
   }
 
-  // ── Public API ─────────────────────────────────────────────
+  //  Public API 
 
   /// Call on session start — initializes camera and begins frame capture.
   Future<void> startCamera() async {
@@ -113,7 +113,7 @@ class CameraNotifier extends AsyncNotifier<CameraState> {
   Stream<String> get frameStream => _service.frameStream;
 }
 
-// ─── Providers ─────────────────────────────────────────────────────────────────
+//  Providers 
 
 final cameraProvider = AsyncNotifierProvider<CameraNotifier, CameraState>(
   CameraNotifier.new,
