@@ -1,45 +1,73 @@
-<h1 align="center">Driver Monitoring System (DMS)</h1>
+<h1 align="center">Driver Monitoring System</h1>
 
 <p align="center">
-  A Flutter mobile application for driver monitoring, camera-based observation, and driving-risk event visualization.
+  <strong>A Flutter-based application for driver behavior monitoring and driving-risk visualization.</strong>
 </p>
 
-<hr>
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-Mobile%20App-02569B?logo=flutter" alt="Flutter">
+  <img src="https://img.shields.io/badge/Dart-Language-0175C2?logo=dart" alt="Dart">
+  <img src="https://img.shields.io/badge/Supabase-Authentication-3FCF8E?logo=supabase" alt="Supabase">
+  <img src="https://img.shields.io/badge/Status-In%20Development-orange" alt="Project Status">
+</p>
 
-<h2>Overview</h2>
+---
+
+<h2>About the Project</h2>
 
 <p>
-  The Driver Monitoring System is a Flutter-based application designed to provide a monitoring dashboard for driver-related events. It includes Supabase authentication, camera preview and frame capture, session management, and visual indicators for potential driving risks.
+  The Driver Monitoring System (DMS) is a mobile application built with Flutter to provide a dashboard for monitoring driver behavior and visualizing potential driving risks. It combines camera access, user authentication, session management, and event-based monitoring into a single interface.
 </p>
 
-<blockquote>
-  <strong>Development status:</strong> The supplied Flutter source currently uses simulated detection events. Camera frames are exposed separately, but a WebSocket connection to the AI backend was not present in the supplied <code>lib/</code> source.
-</blockquote>
+<p>
+  The application is designed to support integration with an AI-powered backend that can analyze camera frames and identify indicators such as drowsiness, prolonged eye closure, yawning, and head-position changes.
+</p>
 
 <h2>Features</h2>
 
 <ul>
-  <li><strong>Authentication:</strong> User registration and login with Supabase Auth.</li>
-  <li><strong>Navigation:</strong> Authentication-aware routing with GoRouter.</li>
-  <li><strong>Camera Preview:</strong> Camera preview using Flutter's camera package.</li>
-  <li><strong>Frame Capture:</strong> Captures JPEG frames and exposes them as Base64-encoded strings through a Dart stream.</li>
-  <li><strong>Monitoring Dashboard:</strong> Session status, risk gauge, recent events, and detection categories.</li>
-  <li><strong>Demo Events:</strong> Simulated drowsiness, closed-eye, yawning, and head-pose events.</li>
-  <li><strong>State Management:</strong> Riverpod providers for authentication, camera, and session state.</li>
-  <li><strong>Dark UI:</strong> A dark dashboard interface with visual status indicators.</li>
+  <li><strong>User Authentication:</strong> Secure sign-up and login using Supabase Auth.</li>
+  <li><strong>Camera Preview:</strong> Access to the device camera for driver monitoring.</li>
+  <li><strong>Frame Capture:</strong> Captures JPEG frames and exposes them as Base64-encoded data.</li>
+  <li><strong>Monitoring Dashboard:</strong> Displays monitoring status, risk indicators, and recent events.</li>
+  <li><strong>Risk Visualization:</strong> A gauge and status cards for presenting monitoring information.</li>
+  <li><strong>Event Categories:</strong> Supports dashboard event types for drowsiness, closed eyes, yawning, and head pose.</li>
+  <li><strong>State Management:</strong> Riverpod manages authentication, camera, and session state.</li>
+  <li><strong>Navigation:</strong> GoRouter handles application navigation and authentication-based routing.</li>
 </ul>
 
-<h2>Tech Stack</h2>
+<h2>Technology Stack</h2>
 
-<ul>
-  <li>Flutter and Dart</li>
-  <li>Riverpod for state management</li>
-  <li>Supabase for authentication and profile lookup</li>
-  <li>GoRouter for navigation</li>
-  <li>Flutter Camera package for camera access and frame capture</li>
-</ul>
-
-<p>Refer to <code>pubspec.yaml</code> in the full repository for exact dependency versions.</p>
+<table>
+  <tr>
+    <th>Technology</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td>Flutter</td>
+    <td>Cross-platform mobile application development</td>
+  </tr>
+  <tr>
+    <td>Dart</td>
+    <td>Application programming language</td>
+  </tr>
+  <tr>
+    <td>Riverpod</td>
+    <td>State management</td>
+  </tr>
+  <tr>
+    <td>Supabase</td>
+    <td>User authentication and profile data</td>
+  </tr>
+  <tr>
+    <td>GoRouter</td>
+    <td>Application routing and navigation</td>
+  </tr>
+  <tr>
+    <td>Camera</td>
+    <td>Camera preview and frame capture</td>
+  </tr>
+</table>
 
 <h2>Project Structure</h2>
 
@@ -89,16 +117,13 @@ lib/
 └── shared/
 </pre>
 
-<p>
-  Some directories, including <code>alerts</code>, <code>analytics</code>, <code>settings</code>, and <code>shared</code>, were placeholders in the supplied source snapshot.
-</p>
-
 <h2>Getting Started</h2>
 
 <h3>Prerequisites</h3>
 
 <ul>
-  <li>Flutter SDK compatible with the project</li>
+  <li>Flutter SDK</li>
+  <li>Dart SDK compatible with the project</li>
   <li>Android Studio or another configured Flutter development environment</li>
   <li>An Android emulator or physical device with camera support</li>
   <li>A Supabase project</li>
@@ -111,19 +136,15 @@ cd RT2603002-flutter-app</code></pre>
 
 <h3>2. Configure Supabase</h3>
 
-<p>Configure your Supabase project URL and publishable/anon key in:</p>
-
-<pre><code>lib/core/constants/supabase_config.dart</code></pre>
-
-<p>Follow the configuration approach already implemented in the project.</p>
+<p>
+  Configure your Supabase project URL and publishable/anon key in the application's Supabase configuration.
+</p>
 
 <p>
-  <strong>Security:</strong> Never place a Supabase <code>service_role</code> key or an <code>sb_secret_...</code> key in a Flutter application or commit it to GitHub. Client-side publishable/anon keys are intended to be public; protect user data with correctly configured Row Level Security (RLS) policies.
+  Keep secret server-side credentials out of the mobile application and source control. Supabase client-side keys are public by design; database access must be protected using appropriate Row Level Security (RLS) policies.
 </p>
 
 <h3>3. Install Dependencies</h3>
-
-<p>Run this command from the project root, where <code>pubspec.yaml</code> is located:</p>
 
 <pre><code>flutter pub get</code></pre>
 
@@ -131,79 +152,54 @@ cd RT2603002-flutter-app</code></pre>
 
 <pre><code>flutter run</code></pre>
 
-<h2>Supabase Configuration</h2>
-
-<p>
-  The supplied Dart source retrieves profile information from a <code>profiles</code> table using the authenticated user's ID. Ensure that your database schema and access policies match the application's implementation.
-</p>
-
-<p>
-  Enable Row Level Security where appropriate and configure policies so authenticated users can access only the records they are authorized to access. Client-side filtering is not a substitute for database security.
-</p>
-
-<h2>Camera Permissions</h2>
-
-<p>Verify that the necessary camera permissions are configured for each target platform.</p>
-
-<p><strong>Android:</strong></p>
-
-<pre><code>android/app/src/main/AndroidManifest.xml</code></pre>
-
-<p>Verify that the required camera permission is declared.</p>
-
-<p><strong>iOS:</strong></p>
-
-<pre><code>ios/Runner/Info.plist</code></pre>
-
-<p>Add an appropriate <code>NSCameraUsageDescription</code> entry.</p>
+<p>Run Flutter commands from the project root directory.</p>
 
 <h2>AI Backend Integration</h2>
 
 <p>
-  The current dashboard uses simulated events to demonstrate its interface. Camera frames are exposed separately as Base64-encoded JPEG data.
+  The monitoring dashboard currently uses simulated detection events to demonstrate its interface. Camera frame capture is implemented separately, and integration with the AI detection backend is a planned development step.
 </p>
 
-<p>To integrate the actual AI backend:</p>
+<p>The intended integration workflow is:</p>
 
 <ol>
-  <li>Configure the backend endpoint and connection protocol.</li>
-  <li>Stream camera frames to the backend in the expected format.</li>
-  <li>Receive and parse detection responses.</li>
-  <li>Map responses to the application's event model.</li>
-  <li>Update session state using actual backend results.</li>
-  <li>Replace the mock event generator with backend-driven events.</li>
-  <li>Implement connection error handling, reconnection, and session cleanup.</li>
-  <li>Test detection latency and alert behavior on target devices.</li>
+  <li>Capture frames from the device camera.</li>
+  <li>Transmit frames to the AI backend using the agreed communication protocol.</li>
+  <li>Receive and parse driver-monitoring results.</li>
+  <li>Update the dashboard with actual detection events and risk indicators.</li>
+  <li>Handle connection failures, reconnection, and monitoring-session cleanup.</li>
 </ol>
 
-<p>
-  Until integration is complete, simulated dashboard events should not be treated as actual driver-risk detections.
-</p>
+<h2>Security</h2>
+
+<ul>
+  <li>Use Supabase Row Level Security to restrict access to user-specific records.</li>
+  <li>Never expose service-role keys or other server-side secrets in the mobile app.</li>
+  <li>Validate and authorize backend requests independently of the Flutter client.</li>
+  <li>Request only the device permissions required by the application.</li>
+</ul>
 
 <h2>Development</h2>
 
-<p>The main state-management components in the supplied source include:</p>
-
-<ul>
-  <li><code>authProvider</code> — Authentication state</li>
-  <li><code>authActionsProvider</code> — Authentication actions</li>
-  <li><code>cameraProvider</code> — Camera lifecycle and frame capture</li>
-  <li><code>sessionProvider</code> — Monitoring-session state and demo events</li>
-</ul>
-
-<p>Format the Dart code and run static analysis before submitting changes:</p>
+<p>To format the code and run static analysis:</p>
 
 <pre><code>dart format .
 flutter analyze</code></pre>
 
-<h2>Safety Disclaimer</h2>
+<h2>Disclaimer</h2>
 
 <p>
-  This project is a development prototype, not a certified driver-safety system. It must not replace attentive driving or be relied upon as the sole means of detecting unsafe driving behavior.
+  This project is under development and is intended for demonstration and development purposes. It is not a certified driver-safety system and should not replace attentive driving or be relied upon as the sole means of detecting unsafe driving behavior.
 </p>
 
 <h2>License</h2>
 
 <p>
-  No license file was included in the supplied source snapshot. Add a <code>LICENSE</code> file and update this section before distributing the project publicly.
+  Add a <code>LICENSE</code> file to specify the terms under which this project may be used, modified, and distributed.
+</p>
+
+<hr>
+
+<p align="center">
+  <sub>Built with Flutter and Dart.</sub>
 </p>
